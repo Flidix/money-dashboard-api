@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 import { BaseEntity } from '@shared/database/entities/base.entity';
 

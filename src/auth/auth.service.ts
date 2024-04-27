@@ -11,11 +11,11 @@ import { Injectable } from '@nestjs/common/decorators';
 export class AuthService extends DatabaseService {
 
   async issueAccessToken(userId: number, userEmail: string) {
-    const refreshToken = await sign({ userId: userId, email: userEmail }, Environment.JWT_SECRET, {
+    const refreshToken = await sign({ userId, email: userEmail }, Environment.JWT_SECRET, {
       expiresIn: '1h',
     });
 
-    const accessToken = await sign({ userId: userId }, Environment.JWT_SECRET, {
+    const accessToken = await sign({ userId }, Environment.JWT_SECRET, {
       expiresIn: '7d',
     });
     return { refreshToken, accessToken };

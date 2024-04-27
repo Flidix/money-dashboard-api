@@ -9,11 +9,7 @@ const filesExtension = isDist ? '.js' : '.ts';
 
 const dataSource = new DataSource({
   type: 'postgres',
-  host: Environment.DATABASE_HOST,
-  port: Environment.DATABASE_PORT,
-  username: Environment.DATABASE_USER,
-  password: Environment.DATABASE_PASSWORD,
-  database: Environment.DATABASE_NAME,
+  url: Environment.DATABASE_URL,
 
   migrationsRun: true,
 

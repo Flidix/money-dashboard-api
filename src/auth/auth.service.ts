@@ -1,4 +1,4 @@
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common/decorators';
 
 import { compare, genSalt, hash } from 'bcryptjs';

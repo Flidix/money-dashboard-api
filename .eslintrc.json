@@ -22,10 +22,16 @@
         "@typescript-eslint/no-unused-vars": "off",
         "require-await": "error",
         "camelcase": "error",
-        "no-console": "error",
         "indent": [
             "error",
             2
-        ]
+        ],
+        "semi": ["error", "always"],
+        "quotes": ["error", "single"],
+        "no-unused-vars": "error",
+        "prefer-const": "error",
+        "prefer-arrow-callback": "error",
+        "object-shorthand": "error",
+        "no-console": "warn"
     }
 }

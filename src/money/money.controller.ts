@@ -1,4 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 
 import { MoneyService } from './money.service';
 
@@ -9,7 +9,7 @@ export class MoneyController {
   constructor(private readonly moneyService: MoneyService) { }
 
   @Post()
-  createMoney(body: CreateMoneyDto) {
+  createMoney(@Body() body: CreateMoneyDto) {
     return this.moneyService.createMoney(body);
   }
 }

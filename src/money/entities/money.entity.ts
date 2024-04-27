@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 import { BaseEntity } from '@shared/database/entities/base.entity';
 import { BalanceEntity } from 'src/balance/entities/balance.entity';
+import { CategoryEntity } from 'src/category/entities/category.entity';
 
 import { databaseTables } from '@shared/database/constants';
 
@@ -21,4 +22,7 @@ export class MoneyEntity extends BaseEntity {
 
   @ManyToOne(() => BalanceEntity, (user) => user.balance)
   balance?: BalanceEntity;
+
+  @ManyToOne(() => CategoryEntity, (category) => category.money)
+  category?: CategoryEntity;
 }

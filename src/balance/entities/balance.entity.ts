@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 import { BaseEntity } from '@shared/database/entities/base.entity';
+import { MoneyEntity } from 'src/money/entities/money.entity';
 import { UserEntity } from 'src/user/entities/user.entity';
 
 import { databaseTables } from '@shared/database/constants';
@@ -18,4 +19,7 @@ export class BalanceEntity extends BaseEntity {
 
   @ManyToOne(() => UserEntity, (user) => user.balance)
   user?: UserEntity;
+
+  @OneToMany(() => MoneyEntity, (money) => money.balance)
+  money: MoneyEntity[];
 }

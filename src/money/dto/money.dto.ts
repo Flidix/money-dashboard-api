@@ -1,4 +1,4 @@
-import { IsBoolean, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateMoneyDto {
     @IsNumber()
@@ -9,4 +9,10 @@ export class CreateMoneyDto {
 
     @IsString()
     description: string;
+
+    @IsNotEmpty()
+    categoryId: number;
+
+    @IsNotEmpty()
+    balanceId: number;
 }

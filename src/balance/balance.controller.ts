@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 
 import { BalanceService } from './balance.service';
 
@@ -16,5 +16,10 @@ export class BalanceController {
   @Post('create')
   createBalance(@CurrentUser('userId') userId: number, @Body() dto: CreateBalanceDto) {
     return this.balanceService.createBalance(userId, dto);
+  }
+
+  @Get('my-balances')
+  getUserBalances(@CurrentUser('userId') userId: number) {
+    return this.balanceService.getUserBalances(userId);
   }
 }

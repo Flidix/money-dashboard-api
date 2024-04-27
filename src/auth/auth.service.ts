@@ -1,6 +1,7 @@
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common/decorators';
 
-import { genSalt, hash } from 'bcryptjs';
+import { compare, genSalt, hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import { Environment } from '@shared/variables/environment';
@@ -12,6 +13,7 @@ import { AuthDto } from './dto/auth.dto';
 @Injectable()
 export class AuthService extends DatabaseService {
   async signUp(body: AuthDto) {
+    // await this.database.users.checkNotExists({ email: body.email });
     const saltRounds = 10;
     const salt = await genSalt(saltRounds);
 
@@ -27,9 +29,19 @@ export class AuthService extends DatabaseService {
     return { token, user };
   }
 
-  // async signIn(body: AuthDto) {
+  async signIn(body: AuthDto) {
+    const user = await this.database.users.findOne({ where: { email: body.email } });
 
-  // }
+    if (!user) throw new NotFoundException('User not found');
+
+    const isValidPassword = await compare(body.password, user.password);
+
+    if (!isValidPassword) throw new BadRequestException('Invalid password');
+
+    const token = await this.issueAccessToken(user.id);
+
+    return { token: token, user };
+  }
 
   async issueAccessToken(userId: number) {
     const accessToken = await sign({ userId }, Environment.JWT_SECRET, {

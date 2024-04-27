@@ -30,9 +30,7 @@ export class AuthService extends DatabaseService {
   }
 
   async signIn(body: AuthDto) {
-    const user = await this.database.users.findOne({ where: { email: body.email } });
-
-    if (!user) throw new NotFoundException('User not found');
+    const user = await this.database.users.findOneOrFail({ where: { email: body.email } });
 
     const isValidPassword = await compare(body.password, user.password);
 

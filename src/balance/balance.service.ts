@@ -13,10 +13,8 @@ export class BalanceService extends DatabaseService {
       userId,
       user,
     });
-
     return balance;
   }
-
   async getUserBalances(userId: number) {
     const balances = await this.database.balances.findAll({ where: { userId } });
     return balances;

@@ -1,18 +1,18 @@
 import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateMoneyDto {
-    @IsNumber()
-    amount: number;
+  @IsNumber()
+  amount: number;
 
-    @IsBoolean()
-    isPositive: boolean;
+  @IsBoolean()
+  isPositive: boolean;
 
-    @IsString()
-    description: string;
+  @IsString()
+  description: string;
 
-    @IsNotEmpty()
-    categoryId: number;
+  @IsNotEmpty()
+  categoryId: number;
 
-    @IsNotEmpty()
-    balanceId: number;
+  @IsNotEmpty()
+  balanceId: number;
 }

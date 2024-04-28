@@ -22,7 +22,12 @@ export class MoneyService extends DatabaseService {
     return money;
   }
 
-  //   async getBalanceMoney(balanceId: number, userId: number) {
-  //     const money = await this.database.money.findAll({ where: { balanceId, userId } });
-  //   }
+  async getBalanceMoney(balanceId: number, userId: number) {
+    const money = await this.database.money.findAll({
+      where: { balanceId, userId },
+      relations: { category: true, balance: true },
+    });
+
+    return money;
+  }
 }

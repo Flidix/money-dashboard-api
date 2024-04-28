@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 
 import { MoneyService } from './money.service';
 
@@ -16,5 +16,10 @@ export class MoneyController {
   @Post()
   createMoney(@Body() body: CreateMoneyDto, @CurrentUser('userId') userId: number) {
     return this.moneyService.createMoney(body, userId);
+  }
+
+  @Get('balance/:balanceId')
+  getBalanceMoney(@Param('balanceId') balanceId: number, @CurrentUser('userId') userId: number) {
+    return this.moneyService.getBalanceMoney(balanceId, userId);
   }
 }

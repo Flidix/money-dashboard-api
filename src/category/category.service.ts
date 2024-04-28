@@ -18,10 +18,11 @@ export class CategoryService extends DatabaseService {
   }
 
   async getUserCategories(userId: number) {
-    const categories = await this.database.categories.findAllOrFail({
-      // @ts-ignore
-      where: [{ userId }, { userId: null }],
-    });
+    const categories = await this.database.categories
+      .createQueryBuilder('category')
+      .where('category.userId = :userId OR category.userId IS NULL', { userId })
+      .orderBy('category.userId', 'DESC')
+      .getMany();
 
     return categories;
   }

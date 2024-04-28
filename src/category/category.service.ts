@@ -8,4 +8,21 @@ export class CategoryService extends DatabaseService {
     const category = await this.database.categories.create({ title });
     return category;
   }
+
+  async createUserCategories(userId: number, title: string) {
+    const user = await this.database.users.findOneOrFail({ where: { id: userId } });
+
+    const category = await this.database.categories.create({ title, user, userId });
+
+    return category;
+  }
+
+  async getUserCategories(userId: number) {
+    const categories = await this.database.categories.findAllOrFail({
+      // @ts-ignore
+      where: [{ userId }, { userId: null }],
+    });
+
+    return categories;
+  }
 }

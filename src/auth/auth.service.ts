@@ -47,4 +47,8 @@ export class AuthService extends DatabaseService {
     });
     return accessToken;
   }
+
+  async checkAuth(userId: number) {
+    return await this.issueAccessToken(userId);
+  }
 }
